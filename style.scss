@@ -1,0 +1,76 @@
+@-webkit-keyframes colorPulse {
+	0% {
+		color: lighten(green, 70%);
+	}
+	40% {
+		color: green;
+	}
+	50% {
+		color: darken(green, 5%);
+	}
+	100% {
+		color: darken(green, 20%);
+	}
+}
+
+@keyframes colorPulse {
+	0% {
+		color: lighten(green, 70%);
+	}
+	40% {
+		color: green;
+	}
+	50% {
+		color: darken(green, 5%);
+	}
+	100% {
+		color: darken(green, 20%);
+	}
+}
+
+:root {
+	background: black;
+	color: darken(green, 20%);
+	font-size: 1.8em;
+	font-family: monospace;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.wrapper {
+	display: flex;
+	height: 100vh;
+	overflow: hidden;
+	text-align: center;
+	width: 100vw;
+}
+
+.column {
+	& > * {
+		display: block;
+		-webkit-animation: 3s infinite colorPulse;
+		animation: 3s infinite colorPulse;
+		padding: 0 0.125em;
+	}
+}
+@for $colNum from 1 through 80 {
+	$duration: random(100) / 23 + 1;
+	$delay: $duration / 50;
+
+	@for $i from 1 through 50 {
+		.col-#{$colNum} :nth-child(#{$i}) {
+			-webkit-animation-duration: #{$duration}s;
+			animation-duration: #{$duration}s;
+			-webkit-animation-delay: #{$i * $delay}s;
+			animation-delay: #{$i * $delay}s;
+		}
+	}
+}
